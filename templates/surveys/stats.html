@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Статистика - {{ survey.title }}{% endblock %}
+{% block content %}
+<div class="card shadow-sm" id="stats-root" data-survey-id="{{ survey.id }}">
+  <div class="card-body">
+    <h1 class="h3">{{ survey.title }}</h1>
+    <div id="stats-box"><p class="text-muted mb-0">Считаем…</p></div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{% load static %}
+  <script src="{% static 'surveys/stats.js' %}"></script>
+{% endblock %}

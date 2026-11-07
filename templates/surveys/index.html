@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Список опросов{% endblock %}
+{% block content %}
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h1 class="h3 card-title">Доступные опросы</h1>
+    <p class="text-muted">Укажи ник в поле справа сверху.</p>
+    {% if surveys %}
+    <div class="list-group list-group-flush">
+      {% for survey in surveys %}
+        <div class="list-group-item px-0 d-flex flex-wrap justify-content-between align-items-baseline gap-2">
+          <a class="fw-semibold text-decoration-none" href="{% url 'surveys:take' survey.id %}">{{ survey.title }}</a>
+          <span class="text-muted small">{{ survey.author.username }} · {{ survey.created_at|date:'d.m.Y' }}</span>
+          <a class="small text-secondary stats-link d-none"
+             data-author="{{ survey.author.username }}"
+             href="{% url 'surveys:stats' survey.id %}">статистика</a>
+        </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p class="mb-0">На портале пока нет опросов. Будь первым, <a href="{% url 'surveys:create' %}">создай опрос</a>.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{% load static %}
+  <script src="{% static 'surveys/index.js' %}"></script>
+{% endblock %}

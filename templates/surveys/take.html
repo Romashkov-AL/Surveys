@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}{{ survey.title }}{% endblock %}
+{% block content %}
+<div class="card shadow-sm" id="take-root" data-survey-id="{{ survey.id }}">
+  <div class="card-body">
+    <h1 class="h3">{{ survey.title }}</h1>
+    <p class="text-muted">Автор: {{ survey.author.username }}</p>
+    <div id="question-box">
+      <p class="text-muted mb-0">Загрузка вопроса…</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{% load static %}
+  <script src="{% static 'surveys/take.js' %}"></script>
+{% endblock %}
